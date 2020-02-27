@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.module.scss';
-import Home from './containers/Home/Home';
+import routes from './routes';
 
 function App() {
   return (
     <div className="App">
-      <Home/>
+      {routes}
     </div>
   );
 }
