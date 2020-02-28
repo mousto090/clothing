@@ -1,4 +1,4 @@
-export const homeSections = [
+export const SECTIONS = [
     { url: 'hats', title: 'hats', imageUrl: 'https://i.ibb.co/cvpntL1/hats.png', id: 1 },
     { url: 'jackets', title: 'jackets', imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png', id: 2 },
     { url: 'sneakers', title: 'sneakers', imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png', id: 3 },

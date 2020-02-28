@@ -2,9 +2,7 @@ import React from "react";
 import Menu from "../../components/Menu/Menu";
 import classes from "./Home.module.scss";
 
-const Home = (props)=> {
-    console.log(props);
-    
+const Home = ()=> {
     return (
         <div className={classes.home}>
             <Menu/>
