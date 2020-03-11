@@ -3,6 +3,7 @@ import classes from "./SigninForm.module.scss";
 import Input from "../../UI/Input/Input";
 import { withFormik } from "formik";
 import Button from "../../UI/Button/Button";
+import { signinWithGoogle } from "../../utils/firebase";
 
 const SigninForm = ({ values, handleChange, handleSubmit }) => {
 
@@ -25,7 +26,13 @@ const SigninForm = ({ values, handleChange, handleSubmit }) => {
                     onChange={handleChange}
                     autoComplete="new-password" //off on the form not working in chrome
                 />
-                <Button type="submit">Submit</Button>
+                <div className={classes.buttons}>
+                    <Button type="submit">Submit</Button>
+                    <Button type="button" onClick={signinWithGoogle}
+                        buttonType="google">
+                        Sign in with Google
+                    </Button>
+                </div>
             </form>
         </div>
     );
