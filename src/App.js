@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.module.scss";
 import routes from "./routes";
 import Header from "./components/Header/Header";
-import firebase from "./utils/firebase";
+import { firebaseAuth, createUser } from "./firebase";
 
 class App extends Component {
   state = {
@@ -11,8 +11,16 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = firebase.auth().onAuthStateChanged(currentUser => {
-      this.setState({ currentUser });
+    this.unsubscribeFromAuth = firebaseAuth.onAuthStateChanged(async authUser => {
+      console.log(authUser);
+      if (!authUser) {
+        return this.setState({ currentUser: null });
+      }
+      const userDocRef = await createUser(authUser);
+      userDocRef.onSnapshot(snapshot => {
+        const { id } = snapshot;
+        this.setState({ currentUser: { ...snapshot.data(), id } })
+      })
 
     });
   }

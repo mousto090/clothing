@@ -3,7 +3,7 @@ import classes from "./SigninForm.module.scss";
 import Input from "../../UI/Input/Input";
 import { withFormik } from "formik";
 import Button from "../../UI/Button/Button";
-import { signinWithGoogle } from "../../utils/firebase";
+import { signinWithGoogle } from "../../firebase";
 
 const SigninForm = ({ values, handleChange, handleSubmit }) => {
 

@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import firebase from "../../utils/firebase";
+import {firebaseAuth} from "../../firebase";
 
 const Header = ({ currentUser }) => {
 
@@ -11,7 +11,7 @@ const Header = ({ currentUser }) => {
     if (currentUser) {
         singInSignoutLink = (
             <Link to="/auth" className={classes.navLink}
-                onClick={() => firebase.auth().signOut()}>
+                onClick={() => firebaseAuth.signOut()}>
                 SIGN OUT
             </Link>
         )
