@@ -12,7 +12,6 @@ class App extends Component {
 
   componentDidMount() {
     this.unsubscribeFromAuth = firebaseAuth.onAuthStateChanged(async authUser => {
-      console.log(authUser);
       if (!authUser) {
         return this.setState({ currentUser: null });
       }

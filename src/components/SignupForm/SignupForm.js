@@ -6,7 +6,8 @@ import { withFormik } from "formik";
 import { valiateEmail, validateRequired, validatePassword, validatePasswordMatch } from "../../utils/validationRules";
 import { firebaseAuth, createUser } from "../../firebase";
 
-const SignupForm = ({ values, errors, handleChange, handleSubmit }) => {
+const SignupForm = ({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => {
+    
     return (
         <div className={classes.singupForm}>
             <h2 className={classes.title}>I do not have a account</h2>
@@ -16,24 +17,27 @@ const SignupForm = ({ values, errors, handleChange, handleSubmit }) => {
                     type='text'
                     name='displayName'
                     value={values.displayName}
-                    error={errors.displayName}
+                    error={errors.displayName && touched.displayName && errors.displayName}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     label='Display Name'
                 />
                 <Input
                     type='email'
                     name='email'
                     value={values.email}
-                    error={errors.email}
+                    error={errors.email && touched.email && errors.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     label='Email'
                 />
                 <Input
                     type='password'
                     name='password'
                     value={values.password}
-                    error={errors.password}
+                    error={errors.password && touched.password && errors.password}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     label='Password'
                     autoComplete="new-password" //off on the form not working in chrome
                 />
@@ -41,8 +45,9 @@ const SignupForm = ({ values, errors, handleChange, handleSubmit }) => {
                     type='password'
                     name='confirmPassword'
                     value={values.confirmPassword}
-                    error={errors.confirmPassword}
+                    error={errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     label='Confirm Password'
                 />
                 <Button type='submit'>SIGN UP</Button>
@@ -77,8 +82,8 @@ const SingupFormiK = withFormik({
         return Object.values(errors).every(v => !v) ? {} : errors;
     },
     //set these two to false to validate only on submit
-    validateOnBlur: false,
-    validateOnChange: false
+    // validateOnBlur: false,
+    // validateOnChange: false
 });
 
 export default SingupFormiK(SignupForm);

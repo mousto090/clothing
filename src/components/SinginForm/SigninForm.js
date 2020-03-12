@@ -3,9 +3,10 @@ import classes from "./SigninForm.module.scss";
 import Input from "../../UI/Input/Input";
 import { withFormik } from "formik";
 import Button from "../../UI/Button/Button";
-import { signinWithGoogle } from "../../firebase";
+import { signinWithGoogle, firebaseAuth } from "../../firebase";
+import { validatePassword, valiateEmail } from "../../utils/validationRules";
 
-const SigninForm = ({ values, handleChange, handleSubmit }) => {
+const SigninForm = ({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => {
 
     // const handleSubmit= ()=>{
 
@@ -18,13 +19,17 @@ const SigninForm = ({ values, handleChange, handleSubmit }) => {
                 <Input type="email" name="email" id="email"
                     label="Email"
                     value={values.email}
+                    error={errors.email && touched.email && errors.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                 />
                 <Input type="password" name="password" id="passwod"
                     label="Password"
-                    value={values.password}
-                    onChange={handleChange}
                     autoComplete="new-password" //off on the form not working in chrome
+                    value={values.password}
+                    error={errors.password && touched.password && errors.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                 />
                 <div className={classes.buttons}>
                     <Button type="submit">Submit</Button>
@@ -40,9 +45,25 @@ const SigninForm = ({ values, handleChange, handleSubmit }) => {
 
 const singinFormik = withFormik({
     mapPropsToValues: () => ({ email: '', password: '' }),
-    handleSubmit: (values, formikBag) => {
-        console.log(values, formikBag);
-
+    handleSubmit: async({ email, password }, formikBag) => {
+        try {
+            await firebaseAuth.signInWithEmailAndPassword(email, password);
+            formikBag.resetForm();
+        } catch (error) {
+            console.log(error);
+            formikBag.setErrors({password: error.message})
+        }
     },
+    validate: ({ email, password }) => {
+        const errors = {
+            email: valiateEmail(email),
+            password: validatePassword(password),
+        }
+        //form is valid when all fields of errors object is false
+        return Object.values(errors).every(v => !v) ? {} : errors;
+    },
+    //set these two to false to validate only on submit
+    // validateOnBlur: false,
+    // validateOnChange: false
 });
 export default singinFormik(SigninForm);
