@@ -19,7 +19,6 @@ provider.setCustomParameters({ prompt: 'select_account' });
 export const firebaseAuth = firebase.auth();
 export const firestore = firebase.firestore();
 export const signinWithGoogle = () => firebaseAuth.signInWithPopup(provider);
-export default firebase;
 
 /**
  * Save the authenticated user to our firebase DB
@@ -38,7 +37,7 @@ export const createUser = async (authenticatedUser, meta) => {
         return userDocRef;
     }
     const { displayName, email } = authenticatedUser;
-    const userData = { ...meta, displayName, email, createdAt: new Date().toISOString() }
+    const userData = { displayName, email, ...meta, createdAt: new Date().toISOString() }
     try {
         await userDocRef.set(userData)
     } catch (error) {
@@ -46,3 +45,5 @@ export const createUser = async (authenticatedUser, meta) => {
     }
     return userDocRef;
 }
+
+export default firebase;

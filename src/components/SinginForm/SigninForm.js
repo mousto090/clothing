@@ -14,7 +14,7 @@ const SigninForm = ({ values, handleChange, handleSubmit }) => {
         <div className={classes.signinForm}>
             <h2 className={classes.title}>I already have an account</h2>
             <span>Sign in with your email and password</span>
-            <form noValidate autoComplete="off" id="signin-form" onSubmit={handleSubmit}>
+            <form id="signin-form" noValidate autoComplete="off" onSubmit={handleSubmit}>
                 <Input type="email" name="email" id="email"
                     label="Email"
                     value={values.email}

@@ -51,4 +51,7 @@ $main-color: black;
             @include shrinkLabel();
         }
     }
+    .error{
+        color: rgb(223, 12, 12);
+    }
 }
