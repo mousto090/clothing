@@ -1,24 +1,26 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./App.module.scss";
 import routes from "./routes";
 import Header from "./components/Header/Header";
 import { firebaseAuth, createUser } from "./firebase";
+import { authActionsCreators } from "./store/actionsCreators";
 
 class App extends Component {
-  state = {
-    currentUser: null
-  };
+  
   unsubscribeFromAuth = null;
 
   componentDidMount() {
     this.unsubscribeFromAuth = firebaseAuth.onAuthStateChanged(async authUser => {
       if (!authUser) {
-        return this.setState({ currentUser: null });
+        //TO DO call signinfailure
+        return this.props.onSigninSucess(null);
       }
       const userDocRef = await createUser(authUser);
       userDocRef.onSnapshot(snapshot => {
         const { id } = snapshot;
-        this.setState({ currentUser: { ...snapshot.data(), id } })
+        const currentUser = { ...snapshot.data(), id };
+        this.props.onSigninSucess(currentUser);
       })
 
     });
@@ -31,11 +33,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header currentUser={this.state.currentUser} />
+        <Header />
         {routes}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  const { authReducer: { error, isLoading, currentUser } } = state;
+  return { error, isLoading, currentUser };
+}
+const mapDispatchToProps = dispatch => ({
+  // onSignin: (email, password) => dispatch(authActionsCreators.signin(email, password)),
+  onSigninSucess: (user) => dispatch(authActionsCreators.signinSuccess(user))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App);

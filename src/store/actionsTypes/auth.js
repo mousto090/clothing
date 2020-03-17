@@ -1,0 +1,7 @@
+const NAMESPACE = 'clothing/auth:';
+
+export default {
+    SIGNIN_INIT: `${NAMESPACE}SIGNIN_INIT`,
+    SIGNIN: `${NAMESPACE}SIGNIN`,
+    SIGN_IN_SUCCESS: `${NAMESPACE}SIGN_IN_SUCCESS`,
+}

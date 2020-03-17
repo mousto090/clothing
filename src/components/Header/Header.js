@@ -3,6 +3,7 @@ import classes from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import {firebaseAuth} from "../../firebase";
+import { connect } from "react-redux";
 
 const Header = ({ currentUser }) => {
 
@@ -30,4 +31,8 @@ const Header = ({ currentUser }) => {
     )
 }
 
-export default Header;
+const mapStateToProps = state => {
+    const { authReducer: { error, isLoading, currentUser } } = state;
+    return { error, isLoading, currentUser };
+  }
+export default connect(mapStateToProps)(Header);
