@@ -1,4 +1,4 @@
-import { default as types } from "./types";
+import types from "./types";
 
 const { SIGNIN_INIT, SIGNIN, SIGN_IN_SUCCESS, SIGN_IN_FAILURE } = types;
 

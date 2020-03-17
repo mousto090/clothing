@@ -1,4 +1,4 @@
-import { default as types } from "./types";
+import types from "./types";
 const { SIGN_IN, SIGN_IN_SUCCESS, SIGN_IN_FAILURE } = types;
 
 const actionsHandlers = {

@@ -1,4 +1,4 @@
-const NAMESPACE = 'clothing/auth:';
+const NAMESPACE = 'clothing/user:';
 
 export default {
     SIGNIN_INIT: `${NAMESPACE}SIGNIN_INIT`,
