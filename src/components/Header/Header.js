@@ -32,7 +32,7 @@ const Header = ({ currentUser }) => {
 }
 
 const mapStateToProps = state => {
-    const { authReducer: { error, isLoading, currentUser } } = state;
+    const { userReducer: { error, isLoading, currentUser } } = state;
     return { error, isLoading, currentUser };
   }
 export default connect(mapStateToProps)(Header);

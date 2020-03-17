@@ -4,7 +4,7 @@ import "./App.module.scss";
 import routes from "./routes";
 import Header from "./components/Header/Header";
 import { firebaseAuth, createUser } from "./firebase";
-import { authActionsCreators } from "./store/actionsCreators";
+import { userActions } from "./store/actions";
 
 class App extends Component {
   
@@ -13,8 +13,7 @@ class App extends Component {
   componentDidMount() {
     this.unsubscribeFromAuth = firebaseAuth.onAuthStateChanged(async authUser => {
       if (!authUser) {
-        //TO DO call signinfailure
-        return this.props.onSigninSucess(null);
+        return this.props.onSigninFailure();
       }
       const userDocRef = await createUser(authUser);
       userDocRef.onSnapshot(snapshot => {
@@ -41,11 +40,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { authReducer: { error, isLoading, currentUser } } = state;
+  const { userReducer: { error, isLoading, currentUser } } = state;
   return { error, isLoading, currentUser };
 }
 const mapDispatchToProps = dispatch => ({
-  // onSignin: (email, password) => dispatch(authActionsCreators.signin(email, password)),
-  onSigninSucess: (user) => dispatch(authActionsCreators.signinSuccess(user))
+  onSigninSucess: (user) => dispatch(userActions.signinSuccess(user)),
+  onSigninFailure: (user) => dispatch(userActions.signinFailure()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App);
