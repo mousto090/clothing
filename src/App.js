@@ -7,7 +7,7 @@ import { firebaseAuth, createUser } from "./firebase";
 import { userActions } from "./store/actions";
 
 class App extends Component {
-  
+
   unsubscribeFromAuth = null;
 
   componentDidMount() {
@@ -44,7 +44,7 @@ const mapStateToProps = state => {
   return { error, isLoading, currentUser };
 }
 const mapDispatchToProps = dispatch => ({
-  onSigninSucess: (user) => dispatch(userActions.signinSuccess(user)),
-  onSigninFailure: (user) => dispatch(userActions.signinFailure()),
+  onSigninSucess: user => dispatch(userActions.signinSuccess(user)),
+  onSigninFailure: () => dispatch(userActions.signinFailure()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App);

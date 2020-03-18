@@ -1,5 +1,7 @@
 import types from "./types";
 
-export const addCartItem = () => {
-
-}
+const {ADD_ITEM} = types;
+export const addItem = (item) => ({
+    type: ADD_ITEM,
+    item
+})

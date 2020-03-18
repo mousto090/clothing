@@ -245,3 +245,5 @@ export const SHOP_COLLECTIONS = [
         ]
     }
 ];
+
+export default SHOP_COLLECTIONS;

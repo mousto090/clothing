@@ -11,7 +11,6 @@ const Auth = ({ currentUser }) => {
     if (currentUser) {
         return <Redirect to="/" />
     }
-    console.log("continue");
     
     return (
         <div className={classes.authContainer}>

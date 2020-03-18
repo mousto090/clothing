@@ -33,8 +33,7 @@ const SigninForm = ({ values, errors, touched, handleBlur, handleChange, handleS
                 />
                 <div className={classes.buttons}>
                     <Button type="submit">Submit</Button>
-                    <Button type="button" onClick={signinWithGoogle}
-                        buttonType="google">
+                    <Button type="button" onClick={signinWithGoogle} className="google">
                         Sign in with Google
                     </Button>
                 </div>
@@ -45,13 +44,13 @@ const SigninForm = ({ values, errors, touched, handleBlur, handleChange, handleS
 
 const singinFormik = withFormik({
     mapPropsToValues: () => ({ email: '', password: '' }),
-    handleSubmit: async({ email, password }, formikBag) => {
+    handleSubmit: async ({ email, password }, formikBag) => {
         try {
             await firebaseAuth.signInWithEmailAndPassword(email, password);
             formikBag.resetForm();
         } catch (error) {
             console.log(error);
-            formikBag.setErrors({password: error.message})
+            formikBag.setErrors({ password: error.message })
         }
     },
     validate: ({ email, password }) => {
