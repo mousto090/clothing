@@ -9,6 +9,7 @@
     "clsx": "^1.1.0",
     "firebase": "^7.9.2",
     "formik": "^2.1.4",
+    "immer": "^6.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",

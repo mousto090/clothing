@@ -1,27 +1,31 @@
 import types from "./types";
+import produce from "immer";
 const { SIGN_IN, SIGN_IN_SUCCESS, SIGN_IN_FAILURE } = types;
 
 const actionsHandlers = {
-    [SIGN_IN]: (state, action) => {
-        return { ...state, error: null, isLoading: true }
+    [SIGN_IN]: (draft, action) => {
+        draft.error = null;
+        draft.isLoading = true
     },
-    [SIGN_IN_FAILURE]: (state, action) => {
-        return { ...state, currentUser: null, error: null, isLoading: true }
+    [SIGN_IN_FAILURE]: (draft, action) => {
+        draft.currentUser = null;
+        draft.error = null;
+        draft.isLoading = false;
     },
-    [SIGN_IN_SUCCESS]: (state, action) => {
-        const { currentUser } = action;
-        return { ...state, currentUser: { ...currentUser }, isLoading: false }
+    [SIGN_IN_SUCCESS]: (draft, action) => {
+        draft.currentUser = action.currentUser;
+        draft.isLoading = false;
     }
 }
 
 const initialState = {
     currentUser: null
 }
-const userReducer = (state = initialState, action) => {
+const userReducer = produce((draft, action) => {
     const { type } = action;
     const handler = actionsHandlers[type];
-    return (handler && handler(state, action)) || state;
-}
+    return (handler && handler(draft, action));
+}, initialState)
 
 
 export default userReducer;
