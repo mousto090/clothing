@@ -3,6 +3,7 @@ import classes from "./CartDropdown.module.scss";
 import Button from "../../../UI/Button/Button";
 import { connect } from "react-redux";
 import CartItem from "../CartItem/CartItem";
+import { getCartItems } from "../../../store/selectors";
 
 const CartDropdown = ({items}) => {
     return (
@@ -16,7 +17,7 @@ const CartDropdown = ({items}) => {
 }
 
 const mapStateToProps = state => {
-    const { cartReducer: { items } } = state
+    const items = getCartItems(state);
     return { items };
 };
 

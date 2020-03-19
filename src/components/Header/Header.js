@@ -28,16 +28,6 @@ const Header = ({ currentUser }) => {
         }
     })
 
-    let singInSignoutLink = <Link to="/auth" className={classes.navLink}>SIGN IN</Link>;
-
-    if (currentUser) {
-        singInSignoutLink = (
-            <Link to="/auth" className={classes.navLink}
-                onClick={() => firebaseAuth.signOut()}>
-                SIGN OUT
-            </Link>
-        )
-    }
     return (
         <div className={classes.header}>
             <Link to="/" className={classes.logoContainer}>
@@ -46,7 +36,14 @@ const Header = ({ currentUser }) => {
             <nav className={classes.navLinks}>
                 <Link to="/shop" className={classes.navLink}>SHOP</Link>
                 <Link to="/shop" className={classes.navLink}>CONTACT</Link>
-                {singInSignoutLink}
+                {
+                    currentUser ? (
+                        <Link to="/auth" className={classes.navLink}
+                            onClick={() => firebaseAuth.signOut()}>
+                            SIGN OUT
+                        </Link>
+                    ) : (<Link to="/auth" className={classes.navLink}>SIGN IN</Link>)
+                }
                 <div className="container" ref={dropdownRef}>
                     <CartButton dropdownToggleHandler={dropdownToggleHandler} />
                     {isDropdownOpen && <CartDropdown />}
@@ -57,7 +54,9 @@ const Header = ({ currentUser }) => {
 }
 
 const mapStateToProps = state => {
-    const { userReducer: { error, isLoading, currentUser } } = state;
+    const {
+        userReducer: { error, isLoading, currentUser },
+    } = state;
     return { error, isLoading, currentUser };
 }
 export default connect(mapStateToProps)(Header);
