@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { firebaseAuth } from "../../firebase";
 import { connect } from "react-redux";
-import CartButton from "../../UI/CartButton/CartButton";
-import CartDropdown from "../../UI/CartDropdown/CartDropdown";
+import CartButton from "../Cart/CartButton/CartButton";
+import CartDropdown from "../Cart/CartDropdown/CartDropdown";
 
 const Header = ({ currentUser }) => {
 

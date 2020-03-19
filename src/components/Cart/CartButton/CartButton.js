@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as ShoppingBagIcon } from "../../assets/shopping-bag.svg";
+import { ReactComponent as ShoppingBagIcon } from "../../../assets/shopping-bag.svg";
 import classes from "./CartButton.module.scss";
 
 const CartButton = ({dropdownToggleHandler}) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './Collection.module.scss';
-import CollectionItem from '../CollectionItem/CollectionItem';
+import CollectionItem from './CollectionItem/CollectionItem';
 
 const Collection = ({ title, items }) => {
     return (

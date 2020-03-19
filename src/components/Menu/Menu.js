@@ -1,6 +1,6 @@
 import React from "react";
 import { SECTIONS } from "../../data/homeData";
-import MenuItem from "../MenuItem/MenuItem";
+import MenuItem from "./MenuItem/MenuItem";
 import classes from "./Menu.module.scss";
 
 const Menu = () => {

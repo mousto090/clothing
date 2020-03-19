@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import classes from './CollectionItem.module.scss';
-import Button from '../../UI/Button/Button';
+import Button from '../../../UI/Button/Button';
 import clsx from 'clsx';
-import { addItem } from '../../store/cart/actions';
+import { addItem } from '../../../store/cart/actions';
 import { connect } from 'react-redux';
 
 const CollectionItem = ({ item, onAddItem }) => {
