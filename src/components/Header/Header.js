@@ -1,17 +1,30 @@
 import React, { useRef, useEffect, useState } from "react";
 import classes from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { firebaseAuth } from "../../firebase";
 import { connect } from "react-redux";
 import CartButton from "../Cart/CartButton/CartButton";
 import CartDropdown from "../Cart/CartDropdown/CartDropdown";
+import { selectCurrentUser, selectUserIsLoading, selectUserError } from "../../store/user/selectors";
+import { createStructuredSelector } from "reselect";
 
 const Header = ({ currentUser }) => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    //open close dropdown when click on icon
+    const history = useHistory();
+    const location = useLocation();
+    const checkoutPath = '/checkout';
+
     const dropdownToggleHandler = () => setIsDropdownOpen(!isDropdownOpen);
+
+    const checkoutHandler = () => {
+        //close drpdwn
+        dropdownToggleHandler();
+        if (location.pathname !== checkoutPath) {
+            history.push(checkoutPath)
+        }
+    }
 
     //use ref to close dropdown on click outside of its container
     const dropdownRef = useRef(null);
@@ -46,17 +59,16 @@ const Header = ({ currentUser }) => {
                 }
                 <div className="container" ref={dropdownRef}>
                     <CartButton dropdownToggleHandler={dropdownToggleHandler} />
-                    {isDropdownOpen && <CartDropdown />}
+                    {isDropdownOpen && <CartDropdown checkoutHandler={checkoutHandler} />}
                 </div>
             </nav>
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    const {
-        userReducer: { error, isLoading, currentUser },
-    } = state;
-    return { error, isLoading, currentUser };
-}
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    error: selectUserError, 
+    isLoading: selectUserIsLoading
+})
 export default connect(mapStateToProps)(Header);

@@ -5,6 +5,8 @@ import routes from "./routes";
 import Header from "./components/Header/Header";
 import { firebaseAuth, createUser } from "./firebase";
 import { userActions } from "./store/actions";
+import { selectCurrentUser, selectUserError, selectUserIsLoading } from "./store/user/selectors";
+import { createStructuredSelector } from "reselect";
 
 class App extends Component {
 
@@ -39,10 +41,13 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { userReducer: { error, isLoading, currentUser } } = state;
-  return { error, isLoading, currentUser };
-}
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  error: selectUserError, 
+  isLoading: selectUserIsLoading
+})
+
 const mapDispatchToProps = dispatch => ({
   onSigninSucess: user => dispatch(userActions.signinSuccess(user)),
   onSigninFailure: () => dispatch(userActions.signinFailure()),

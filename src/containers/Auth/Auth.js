@@ -4,6 +4,8 @@ import SigninForm from "../../components/SinginForm/SigninForm";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../store/user/selectors";
 
 const Auth = ({ currentUser }) => {
     //TO DO: handle this with unauthenticated HOC component 
@@ -20,8 +22,9 @@ const Auth = ({ currentUser }) => {
     );
 };
 
-const mapStateToProps = state => {
-    const { userReducer: { currentUser } } = state;
-    return { currentUser };
-}
+//createStructuredSelector to combine more selector without
+//repeating passing state as it passe it automatically
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+})
 export default connect(mapStateToProps)(Auth);
