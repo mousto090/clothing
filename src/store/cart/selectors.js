@@ -2,14 +2,21 @@ import { createSelector } from "reselect";
 
 const selectCart = state => state.cartReducer;
 
-export const getCartItems = createSelector([selectCart], (cartReducer) => cartReducer.items);
+export const selectCartItems = createSelector([selectCart], (cartReducer) => cartReducer.items);
 /**
  * Returns the total quantie of cart items
  * This prevent recomputing quatity count unless items change
  */
-export const getCartItemsCount = createSelector(
-    [getCartItems],
+export const selectCartItemsCount = createSelector(
+    [selectCartItems],
     (items) => {
-        return items.reduce((sumQte, item) => sumQte += item.quantity, 0)
+        return items.reduce((sumQte, {quantity}) => sumQte += quantity, 0)
+    }
+)
+
+export const selectCartTotalPrice = createSelector(
+    [selectCartItems],
+    (items) => {
+        return items.reduce((total, {price, quantity}) => total += price * quantity, 0)
     }
 )
