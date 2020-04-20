@@ -18,7 +18,7 @@ const CollectionItem = ({ item, onAddItem }) => {
             <div className={classes.image} style={{ backgroundImage: `url(${imageUrl})` }} />
             <div className={classes.footer}>
                 <span className={classes.name}>{name}</span>
-                <span className={classes.price}>{price}</span>
+                <span className={classes.price}>€{price}</span>
             </div>
             {!hidden && (
                 <Button className={clsx(classes.addToCartBtn, 'inverted')} onClick={() => onAddItem(item)}>

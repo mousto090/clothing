@@ -4,6 +4,7 @@ import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotalPrice } from "../../store/cart/selectors";
 import { connect } from "react-redux";
 import CheckoutItem from "../../components/CheckoutItem/CheckoutItem";
+import StripeButton from "../../components/Stripe/StripeButton/StripeButton";
 
 const header = ["Product", "Description", "Quantity", "Price", "Remove"];
 const headerRow = header.map(title => (
@@ -12,15 +13,27 @@ const headerRow = header.map(title => (
     </div>
 ))
 const Checkout = ({ items, totalPrice }) => {
-    const cartItems = items.length ? items.map(item => <CheckoutItem item={item} key={item.id} />)
-        : (<p>Your cart is empty</p>)
+    if (!items.length) {
+        return (<p>Your cart is empty</p>)
+    }
     return (
         <div className={classes.checkoutContainer}>
             <div className={classes.checkoutHeader}>
                 {headerRow}
             </div>
-            {cartItems}
-            {items.length ? (<div className={classes.total}>TOTAL: ${totalPrice}</div>) : null}
+            {
+                items.map(item => <CheckoutItem item={item} key={item.id} />)
+            }
+            <div className={classes.total}>
+                TOTAL: €{totalPrice}
+            </div>
+            <div className={classes.cardInfo}>
+                <div>*Use the following test credit card for payments*</div>
+                <div><b>Card number : </b> 5200 8282 8282 8210 </div>
+                <div><b>Exp</b>: Any future date </div>
+                <div><b>CVC</b>: Any 3 digits</div>
+            </div>
+            <StripeButton price={totalPrice} />
         </div>
     )
 }
