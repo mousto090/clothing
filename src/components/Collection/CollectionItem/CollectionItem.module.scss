@@ -1,5 +1,6 @@
 .collectionItem {
-  width: 22%;
+  // width: 22vw;
+  // margin-right: 10px;
   display: flex;
   flex-direction: column;
   height: 350px;
@@ -43,8 +44,8 @@
       margin-bottom: 15px;
     }
 
-    .price {
-      width: 10%;
-    }
+    // .price {
+    //   width: 10%;
+    // }
   }
 }

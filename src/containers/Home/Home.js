@@ -1,11 +1,11 @@
 import React from "react";
-import Menu from "../../components/Menu/Menu";
+import CatalogueItems from "../../components/Catalogue/CatalogueItems/CatalogueItems";
 import classes from "./Home.module.scss";
 
 const Home = ()=> {
     return (
         <div className={classes.home}>
-            <Menu/>
+            <CatalogueItems/>
         </div>
     );
 }

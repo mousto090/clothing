@@ -1,17 +1,15 @@
 import React from "react";
-import classes from "./Shop.module.scss";
 import Collection from "../../components/Collection/Collection";
-import { SHOP_COLLECTIONS } from "../../data/shopData";
+import { Route, Switch } from "react-router-dom";
+import CollectionOverview from "../../components/Collection/CollectionOverview/CollectionOverview";
 
-const Shop = () => {
+
+const Shop = ({match}) => {
     return (
-        <div className={classes.shop}>
-            {
-                SHOP_COLLECTIONS.map(collection => (
-                    <Collection key={collection.id} title={collection.title} items={collection.items} />
-                ))
-            }
-        </div>
+        <Switch>
+            <Route exact path={`${match.path}`} component={CollectionOverview}/>
+            <Route path={`${match.path}/:collectionPath`} component={Collection}/>
+        </Switch>
     );
 }
 

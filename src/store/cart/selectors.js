@@ -9,14 +9,10 @@ export const selectCartItems = createSelector([selectCart], (cartReducer) => car
  */
 export const selectCartItemsCount = createSelector(
     [selectCartItems],
-    (items) => {
-        return items.reduce((sumQte, {quantity}) => sumQte += quantity, 0)
-    }
+    (items) => items.reduce((sumQte, {quantity}) => sumQte += quantity, 0)
 )
 
 export const selectCartTotalPrice = createSelector(
     [selectCartItems],
-    (items) => {
-        return items.reduce((total, {price, quantity}) => total += price * quantity, 0)
-    }
+    (items) => items.reduce((total, {price, quantity}) => total += price * quantity, 0)
 )

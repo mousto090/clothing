@@ -1,18 +1,18 @@
 import { createSelector } from "reselect";
 
-const userReducer = state => state.userReducer;
+const selectUser = state => state.userReducer;
 
 export const selectCurrentUser = createSelector(
-    [userReducer],
+    [selectUser],
     (userReducer) => userReducer.currentUser
 )
 
 export const selectUserError = createSelector(
-    [userReducer],
+    [selectUser],
     (userReducer)=>userReducer.error
 )
 
 export const selectUserIsLoading = createSelector(
-    [userReducer],
+    [selectUser],
     (userReducer)=>userReducer.isLoading
 )
