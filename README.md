@@ -8,6 +8,6 @@ Some used stack include
 
 [firebase](https://firebase.google.com/) for database and hosting
 
-[heroku](https://www.heroku.com/) another hosting plateform but using their container registry with [docker](https://www.docker.com/)
+[heroku](https://www.heroku.com/) another PaaS for hosting but using their container registry with [docker](https://www.docker.com/)
 
 [Stripe](https://stripe.com) for online payments
