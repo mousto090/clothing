@@ -1,4 +1,5 @@
 import types from "./types";
-const {INIT_SHOP_COLLECTIONS} = types;
+const {FETCH_COLLECTIONS_SUCCESS, FETCH_COLLECTIONS_INIT} = types;
 
-export const initShopCollections = () => ({type: INIT_SHOP_COLLECTIONS})
+export const fetchShopCollectionsInit = () => ({type: FETCH_COLLECTIONS_INIT})
+export const fetchShopCollectionsSuccess = (collections) => ({type: FETCH_COLLECTIONS_SUCCESS, collections})

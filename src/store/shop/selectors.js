@@ -4,7 +4,7 @@ const selectShop = state => state.shopReducer
 
 export const selectCollections = createSelector(
     [selectShop],
-    shopReducer=> shopReducer.collections
+    shopReducer => shopReducer.collections
 )
 /**
  * Function that return function, so collectionPath param in props 
@@ -13,5 +13,10 @@ export const selectCollections = createSelector(
  */
 export const selectCollection = (collectionPath) => createSelector(
     [selectCollections],
-    collections=> collections[collectionPath]
+    collections => collections[collectionPath]
+)
+
+export const selectIsCollectionLoading = createSelector(
+    [selectShop],
+    shopReducer => shopReducer.isLoading
 )

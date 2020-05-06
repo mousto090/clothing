@@ -1,17 +1,20 @@
 import types from "./types";
 import produce from "immer";
-import SHOP_COLLECTIONS from "../../data/shopData";
 
-const {INIT_SHOP_COLLECTIONS} = types;
+const {FETCH_COLLECTIONS_SUCCESS, FETCH_COLLECTIONS_INIT} = types;
 
 const actionsHandlers = {
-    [INIT_SHOP_COLLECTIONS]: (draft, action) => {
-        // draft.collections = SHOP_COLLECTIONS;
-    }
+    [FETCH_COLLECTIONS_INIT]: (draft, action) => {
+        draft.isLoading = true;
+    },
+    [FETCH_COLLECTIONS_SUCCESS]: (draft, action) => {
+        draft.collections = action.collections;
+        draft.isLoading = false;
+    },
 }
 
 const initialState = {
-    collections: SHOP_COLLECTIONS
+    collections: {}
 };
 
 const shopReducer = produce((draft , action) => {

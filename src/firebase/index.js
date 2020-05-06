@@ -2,7 +2,11 @@ import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth';
 
-var config = {
+export const firebaseDataKeys = {
+    shopDataCollectionName: "collections",
+}
+
+const config = {
     apiKey: "AIzaSyDHVxj_tPuYe2DhLw1TRLnBBA1MesnhQm8",
     authDomain: "clothing-77955.firebaseapp.com",
     databaseURL: "https://clothing-77955.firebaseio.com",

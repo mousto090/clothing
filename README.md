@@ -11,3 +11,11 @@ Some used stack include
 [heroku](https://www.heroku.com/) another PaaS for hosting but using their container registry with [docker](https://www.docker.com/)
 
 [Stripe](https://stripe.com) for online payments
+
+## Deploying production to heroku
+
+`heroku create my_heroku_app_name --buildpack mars/create-react-app`
+
+`git push heroku master`
+
+
